@@ -11,7 +11,7 @@ export default class App extends React.Component {
 
     async componentDidMount() {
         await Font.loadAsync({
-            'Rubik-Regular': require('./assets/fonts/Rubik-Regular.ttf'),
+            'Rubik-Regular': require('./assets/fonts/SpoqaHanSansBold.ttf'),
             'rubicon-icon-font': require('./assets/fonts/rubicon-icon-font.ttf'),
 
         });
