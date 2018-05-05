@@ -21,6 +21,7 @@
   "dependencies": {
     "@shoutem/ui": "^0.23.4",
     "expo": "^27.0.1",
+    "lottie-react-native": "^2.3.2",
     "native-base": "^2.4.3",
     "react": "16.3.1",
     "react-native": "~0.55.2"

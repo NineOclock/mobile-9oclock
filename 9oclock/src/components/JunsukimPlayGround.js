@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { View, Card, Image, Subtitle, Caption, Examples} from '@shoutem/ui';
+import { Text } from '@shoutem/ui';
 
-export default class ShoutemExample extends Component {
+export default class JunsuKimPlayGround extends Component {
     static navigationOptions = {
         title: 'Shoutem Example',
     };
 
     render() {
         return (
-            <Examples/>
+            <Text>JunsuKim PlayGround</Text>
         );
     }
 }
