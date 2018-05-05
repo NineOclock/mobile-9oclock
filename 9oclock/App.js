@@ -1,18 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Font } from 'expo';
 
-import Test from './src/components/TestBananaImage';
+import Test from './src/components/ShoutemExample';
 
 export default class App extends React.Component {
+    state = {
+        fontLoaded: false,
+    };
+
+    async componentDidMount() {
+        await Font.loadAsync({
+            'Rubik-Regular': require('./assets/fonts/Rubik-Regular.ttf'),
+            'rubicon-icon-font': require('./assets/fonts/rubicon-icon-font.ttf'),
+
+        });
+        this.setState({ fontLoaded: true });
+    }
+
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.view}/>
-                <View style={styles.test}>
-                    <Test />
-                </View>
-                <View style={styles.view}/>
-            </View>
+            this.state.fontLoaded ? <Test/> : null
         );
     }
 }
