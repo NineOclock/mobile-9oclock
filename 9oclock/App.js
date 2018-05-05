@@ -10,7 +10,9 @@ import { View, Divider, Button, Text} from '@shoutem/ui';
 import ShoutemExample from './src/components/ShoutemExample';
 import JunsuKimPlayGround from './src/components/JunsukimPlayGround';
 import JammanboPlayGround from './src/components/JammanboPlayGround';
-
+import LocationTest from './src/components/LocationTest';
+import MapTest from "./src/components/MapTest";
+import LottieTest from './src/components/LottieTest';
 
 class Home extends React.Component {
     static navigationOptions = {
@@ -45,12 +47,27 @@ class Home extends React.Component {
                         <Button onPress={() => navigate('JammanboPlayGround')}>
                             <Text>Jammanbo PlayGround</Text>
                         </Button>
-                        Divider styleName="line" />
+                        <Divider styleName="line" />
 
                         <Button onPress={() => navigate('JunsuKimPlayGround')}>
                             <Text>JunsuKim PlayGround</Text>
                         </Button>
-                        Divider styleName="line" />
+                        <Divider styleName="line" />
+
+                        <Button onPress={() => navigate('LocationTest')}>
+                            <Text>LocationTest</Text>
+                        </Button>
+                        <Divider styleName="line" />
+
+                        <Button onPress={() => navigate('MapTest')}>
+                            <Text>Map View</Text>
+                        </Button>
+                        <Divider styleName="line" />
+
+                        <Button onPress={() => navigate('LottieTest')}>
+                            <Text>LottieTest</Text>
+                        </Button>
+                        <Divider styleName="line" />
 
                         <Button/>
                     </View>
@@ -60,32 +77,14 @@ class Home extends React.Component {
     }
 }
 
-class App1 extends React.Component {
-    state = {
-        fontLoaded: false,
-    };
-
-    async componentDidMount() {
-        await Font.loadAsync({
-            'Rubik-Regular': require('./assets/fonts/SpoqaHanSansBold.ttf'),
-            'rubicon-icon-font': require('./assets/fonts/rubicon-icon-font.ttf'),
-
-        });
-        this.setState({ fontLoaded: true });
-    }
-
-    render() {
-        return (
-            this.state.fontLoaded ? <Test/> : null
-        );
-    }
-}
-
 const App = createStackNavigator({
     Home: { screen: Home },
     ShoutemExample: { screen: ShoutemExample },
     JammanboPlayGround: { screen: JammanboPlayGround },
     JunsuKimPlayGround: { screen: JunsuKimPlayGround },
+    LocationTest: { screen: LocationTest },
+    MapTest: { screen: MapTest},
+    LottieTest: { screen: LottieTest },
 });
 
 export default App;
