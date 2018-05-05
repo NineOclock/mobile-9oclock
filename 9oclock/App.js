@@ -1,10 +1,66 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Font } from 'expo';
+import { createStackNavigator } from 'react-navigation';
+import { View, Divider, Button, Text} from '@shoutem/ui';
 
-import Test from './src/components/ShoutemExample';
+/**
+ * Views
+ */
+import ShoutemExample from './src/components/ShoutemExample';
+import JunsuKimPlayGround from './src/components/JunsukimPlayGround';
+import JammanboPlayGround from './src/components/JammanboPlayGround';
 
-export default class App extends React.Component {
+
+class Home extends React.Component {
+    static navigationOptions = {
+        title: 'Home',
+    };
+
+    state = {
+        fontLoaded: false,
+    };
+
+    async componentDidMount() {
+        await Font.loadAsync({
+            'Rubik-Regular': require('./assets/fonts/SpoqaHanSansBold.ttf'),
+            'rubicon-icon-font': require('./assets/fonts/rubicon-icon-font.ttf'),
+
+        });
+        this.setState({ fontLoaded: true });
+    }
+
+    render() {
+        const { navigate } = this.props.navigation;
+
+        return (
+            this.state.fontLoaded ?
+                (
+                    <View>
+                        <Button onPress={() => navigate('ShoutemExample')}>
+                            <Text>Shoutem Example</Text>
+                        </Button>
+                        <Divider styleName="line" />
+
+                        <Button onPress={() => navigate('JammanboPlayGround')}>
+                            <Text>Jammanbo PlayGround</Text>
+                        </Button>
+                        Divider styleName="line" />
+
+                        <Button onPress={() => navigate('JunsuKimPlayGround')}>
+                            <Text>JunsuKim PlayGround</Text>
+                        </Button>
+                        Divider styleName="line" />
+
+                        <Button/>
+                    </View>
+                )
+                : null
+        );
+    }
+}
+
+class App1 extends React.Component {
     state = {
         fontLoaded: false,
     };
@@ -24,6 +80,15 @@ export default class App extends React.Component {
         );
     }
 }
+
+const App = createStackNavigator({
+    Home: { screen: Home },
+    ShoutemExample: { screen: ShoutemExample },
+    JammanboPlayGround: { screen: JammanboPlayGround },
+    JunsuKimPlayGround: { screen: JunsuKimPlayGround },
+});
+
+export default App;
 
 const styles = StyleSheet.create({
     container: {
