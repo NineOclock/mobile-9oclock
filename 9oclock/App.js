@@ -25,7 +25,7 @@ class Home extends React.Component {
 
     async componentDidMount() {
         await Font.loadAsync({
-            'Rubik-Regular': require('./assets/fonts/SpoqaHanSansBold.ttf'),
+            'Rubik-Regular': require('./assets/fonts/SpoqaHanSansLight.ttf'),
             'rubicon-icon-font': require('./assets/fonts/rubicon-icon-font.ttf'),
 
         });
