@@ -13,6 +13,7 @@ import JammanboPlayGround from './src/components/JammanboPlayGround';
 import LocationTest from './src/components/LocationTest';
 import MapTest from "./src/components/MapTest";
 import LottieTest from './src/components/LottieTest';
+import LoginTest from './src/components/LoginTest';
 
 class Home extends React.Component {
     static navigationOptions = {
@@ -69,7 +70,11 @@ class Home extends React.Component {
                         </Button>
                         <Divider styleName="line" />
 
-                        <Button/>
+                        <Button onPress={() => navigate('LoginTest')}>
+                            <Text>Login Test</Text>
+                        </Button>
+                        <Divider styleName="line" />
+
                     </View>
                 )
                 : null
@@ -85,6 +90,7 @@ const App = createStackNavigator({
     LocationTest: { screen: LocationTest },
     MapTest: { screen: MapTest},
     LottieTest: { screen: LottieTest },
+    LoginTest: { screen: LoginTest },
 });
 
 export default App;
