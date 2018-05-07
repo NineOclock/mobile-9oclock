@@ -1,5 +1,14 @@
 {
-  "expo": {
-    "sdkVersion": "27.0.0"
-  }
-}
+   "expo": {
+    "name": "nineoclock",
+    "version": "1.0.0",
+    "slug": "nineoclock",
+    "sdkVersion": "27.0.0",
+    "ios": {
+      "bundleIdentifier": "com.nineoclock.nineoclock"
+    },
+    "android": {
+      "package": "com.nineoclock.nineoclock"
+    }
+   }
+ }
