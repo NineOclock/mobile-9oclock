@@ -1,35 +1,31 @@
 import React from 'react';
 import { Font } from 'expo';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Divider } from '@shoutem/ui';
 
 class HomeScreen extends React.Component {
+    /**
+     * 네비게이션 옵션 설정
+     * @type {{title: string}}
+     */
     static navigationOptions = {
         title: 'Home',
     };
 
-    state = {
-        fontLoaded: false,
-    };
-
-    async componentDidMount() {
-        await Font.loadAsync({
-            'Rubik-Regular': require('../../../assets/fonts/SpoqaHanSansBold.ttf'),
-            'rubicon-icon-font': require('../../../assets/fonts/rubicon-icon-font.ttf'),
-
-        });
-        this.setState({ fontLoaded: true });
-    }
-
+    /**
+     * render
+     */
     render() {
+        const { navigate } = this.props.navigation;
+
         return (
-            this.state.fontLoaded ?
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Home Screen haha</Text>
-                    <Button
-                        title="Go to Next"
-                        onPress={() => this.props.navigation.navigate('MonthlyWork')}
-                    />
-                </View> : null
+            <View>
+                <Button
+                    onPress={() => navigate('MonthlyWork')}
+                >
+                    <Text>월간뷰</Text>
+                </Button>
+                <Divider styleName="line" />
+            </View>
         );
     }
 }
