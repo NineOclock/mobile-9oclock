@@ -1,30 +1,33 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { Font } from 'expo';
+import { View, Text, Button, Divider } from '@shoutem/ui';
 
-class DetailsScreen extends React.Component {
+class HomeScreen extends React.Component {
+    /**
+     * 네비게이션 옵션 설정
+     * @type {{title: string}}
+     */
     static navigationOptions = {
         title: 'Detail',
     };
 
+    /**
+     * render
+     */
     render() {
+        const { navigate } = this.props.navigation;
+
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Details Screen</Text>
+            <View>
                 <Button
-                    title="Go to Details... again"
-                    onPress={() => this.props.navigation.push('Details')}
-                />
-                <Button
-                    title="Go to Home"
-                    onPress={() => this.props.navigation.navigate('Home')}
-                />
-                <Button
-                    title="Go back"
-                    onPress={() => this.props.navigation.goBack()}
-                />
+                    onPress={() => navigate('DatePicker')}
+                >
+                    <Text>DatePicker</Text>
+                </Button>
+                <Divider styleName="line" />
             </View>
         );
     }
 }
 
-export default DetailsScreen;
+export default HomeScreen;

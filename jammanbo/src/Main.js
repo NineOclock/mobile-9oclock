@@ -3,6 +3,10 @@ import { Font } from 'expo';
 import { View, Text, Button } from 'react-native';
 
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+
+/**
+ * 서비스에 필요한 모든 페이지를 로드한다.
+ */
 import {
     HomeScreen,
     DetailScreen,
@@ -11,24 +15,36 @@ import {
     LandingScreen,
     DummyScreen,
     LoginScreen,
+    DatePickerScreen,
 
 } from './screens';
 
+/**
+ * 메인 스택
+ */
 const PagesStack = createStackNavigator({
     Home: HomeScreen,
     MonthlyWork: MonthlyWorkScreen,
 });
 
+/**
+ * 세부 스택 세부 검토사항을 포함한다.
+ */
 const DetailStack = createStackNavigator({
     Detail: DetailScreen,
+    DatePicker: DatePickerScreen,
 });
 
-
+/**
+ * 샤우템 예제
+ */
 const ShoutemStack = createStackNavigator({
     Base: ShoutemScreen,
 });
 
-
+/**
+ * 메인 네비게이션
+ */
 const MainTabNavitagion = createBottomTabNavigator(
     {
         Pages: PagesStack,
@@ -37,21 +53,23 @@ const MainTabNavitagion = createBottomTabNavigator(
     },
 );
 
-const HomeStack = createStackNavigator({
-    Landing: LandingScreen,
-    // Home: HomeScreen,
-    // Main: MainTabNavitagion,
-    MonthlyWork: MonthlyWorkScreen,
-});
-
-
+/**
+ * 서비스의 진입점
+ */
 class Main extends React.Component {
+    /**
+     * 기본 상태설정
+     */
     state = {
         fontLoaded: false,
         isReady: false,
         isLogin: false,
     };
 
+    /**
+     * componentDidMount
+     * 폰트를 로딩한다.
+     */
     async componentDidMount() {
         this.checkReady();
         await Font.loadAsync({
@@ -62,15 +80,24 @@ class Main extends React.Component {
         this.setState({ fontLoaded: true });
     }
 
+    /**
+     * 메인 페이지 이동 여부 체크
+     */
     checkReady = () => {
         // 로그인 등의 초기 앱 실행가능 상태를 체크한다.
         setTimeout(() => this.setState({isReady: true}), 1000);
     }
 
+    /**
+     * 로그인 시도
+     */
     handleLogin = () => {
         this.setState({isLogin: true})
     }
 
+    /**
+     * Render
+     */
     render() {
         let content = <DummyScreen/>;
         if(this.state.fontLoaded) {

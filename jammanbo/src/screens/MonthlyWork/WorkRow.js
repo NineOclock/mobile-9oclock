@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View, Text } from 'react-native';
 import {
     Divider,
@@ -20,65 +21,17 @@ import {
  */
 import Utils from '../../utils'
 
-class MonthlyWorkScreen extends React.Component {
-    static navigationOptions = {
-        title: '월간뷰',
-    };
+/**
+ * 월간 출근 화면에 하나의 행(하나의 날짜)에 해당하는 컴포넌트
+ */
+class WorkRow extends React.Component {
+    render() {
+        const {
+           workItem
+        } = this.props;
+        const type = Utils.getStringType(workItem.type);
 
-    /**
-     * constructor
-     */
-    constructor(props) {
-        super(props);
-        this.renderRow = this.renderRow.bind(this);
-        this.state = {workDate: this.getDummyData()};
-    }
-
-    /**
-     * 더미데이터를 생성한다.
-     */
-    getDummyData = () => {
-        let data = [];
-        for(let i = 1; i <= 31; ++i) {
-            let date = new Date(2018, 5, i);
-
-            if(date.getDay() !== 0 && date.getDay() !== 6) {
-                if(i === 11) {
-                    data.push(
-                        {
-                            type: 'off',
-                            date: new Date(2018, 5, i),
-                        }
-                    )
-                } else if (i % 10 !== 4) {
-                    data.push(
-                        {
-                            type: 'work',
-                            date: new Date(2018, 5, i),
-                            startTime: new Date(2018, 5, i, 8, 60 - i),
-                            endTime: new Date(2018, 5, i, 18, i),
-                        }
-                    )
-                } else {
-                    data.push(
-                        {
-                            type: 'late',
-                            date: new Date(2018, 5, i),
-                            startTime: new Date(2018, 5, i, 10, 60 - i),
-                            endTime: new Date(2018, 5, i, 18, i),
-                        }
-                    )
-                }
-            }
-        }
-        return data;
-    }
-
-
-    renderRow(workDate) {
-        const type = Utils.getStringType(workDate.type);
-
-        if(workDate.type === 'off') {
+        if(workItem.type === 'off') {
             return (
                 <Row style={{
                     backgroundColor: 'white',
@@ -88,7 +41,7 @@ class MonthlyWorkScreen extends React.Component {
                     <View style={styles.rowOff}>
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                             <Text style={{fontSize: 13, fontFamily: 'Rubik-Regular', color: 'white'}}>
-                                {Utils.getStringOff(workDate.date)}
+                                {Utils.getStringOff(workItem.date)}
                             </Text>
                         </View>
                     </View>
@@ -114,12 +67,12 @@ class MonthlyWorkScreen extends React.Component {
                                     marginTop: 5
                                 }}>
                                     <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular'}}>
-                                        {workDate.date.getMonth() + 1 + '월'}
+                                        {workItem.date.getMonth() + 1 + '월'}
                                     </Text>
                                 </View>
                                 <View style={{flex: 3, alignItems: 'center', justifyContent: 'flex-start'}}>
                                     <Text style={{fontSize: 21, fontWeight: 'bold'}}>
-                                        {workDate.date.getDate()}
+                                        {workItem.date.getDate()}
                                     </Text>
                                 </View>
                                 <View style={{
@@ -129,7 +82,7 @@ class MonthlyWorkScreen extends React.Component {
                                     marginBottom: 5
                                 }}>
                                     <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular'}}>
-                                        {Utils.weekdays[workDate.date.getDay()]}
+                                        {Utils.weekdays[workItem.date.getDay()]}
                                     </Text>
                                 </View>
                             </View>
@@ -141,15 +94,15 @@ class MonthlyWorkScreen extends React.Component {
                             <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
                                 <Text style={{fontSize: 15, fontFamily: 'Rubik-Regular'}}>
                                     {
-                                        Utils.getStringDate(workDate.startTime) + ' ~ ' +
-                                        Utils.getStringDate(workDate.endTime)
+                                        Utils.getStringDate(workItem.startTime) + ' ~ ' +
+                                        Utils.getStringDate(workItem.endTime)
                                     }
                                 </Text>
                             </View>
                             {/*시간*/}
                             <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
                                 <Text style={{fontSize: 15, fontFamily: 'Rubik-Regular', color: 'gray'}}>
-                                    {Utils.getStringWorkRange(workDate.startTime, workDate.endTime)}
+                                    {Utils.getStringWorkRange(workItem.startTime, workItem.endTime)}
                                 </Text>
                             </View>
                         </View>
@@ -177,23 +130,6 @@ class MonthlyWorkScreen extends React.Component {
                 </Row>
             );
         }
-    }
-
-    render() {
-        const workDate = this.state.workDate;
-
-        return (
-            <Screen styleName={"paper"}>
-                {/*<Tile>*/}
-                {/*<Title styleName="md-gutter-bottom">{"Test"}</Title>*/}
-                {/*</Tile>*/}
-                <Divider styleName="line" />
-                <ListView
-                    data={workDate}
-                    renderRow={this.renderRow}
-                />
-            </Screen>
-        );
     }
 }
 
@@ -245,4 +181,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Rubik-Regular',
     }
 });
-export default MonthlyWorkScreen;
+
+WorkRow.propTypes = {
+    /**
+     * 해당하는 날짜의 근무 정보입니다.
+     */
+    workItem: PropTypes.bool.isRequired,
+};
+
+export default WorkRow;
