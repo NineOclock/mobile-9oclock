@@ -8,9 +8,16 @@ import DatePicker from './DatePicker';
  * 날짜 선택 다이얼로그 입니다.
  */
 class DatePickerModal extends React.Component {
+
+    /**
+     * render
+     */
     render() {
         const {
-            visible
+            startDate,
+            endDate,
+            visible,
+            onSelect,
         } = this.props;
         return (
             <Modal
@@ -32,7 +39,11 @@ class DatePickerModal extends React.Component {
                     onPress={this.props.onClose}
                 >
                     <TouchableHighlight onPress={()=> {}}>
-                        <DatePicker/>
+                        <DatePicker
+                            startDate={startDate}
+                            endDate={endDate}
+                            onSelect={onSelect}
+                        />
                     </TouchableHighlight>
                 </TouchableHighlight>
             </Modal>
@@ -49,6 +60,19 @@ DatePickerModal.propTypes = {
      * 모달 다이얼로그를 닫을 때 발생하는 이벤트 입니다.
      */
     onClose: PropTypes.func.isRequired,
+    /**
+     * 시작 날짜 입니다.
+     */
+    startDate: PropTypes.object.isRequired,
+    /**
+     * 끝 날짜 입니다.
+     */
+    endDate: PropTypes.object.isRequired,
+    /**
+     * 날짜를 선택하면 발생하는 이벤트 입니다.
+     */
+    onSelect: PropTypes.func.isRequired,
 };
+
 
 export default DatePickerModal;

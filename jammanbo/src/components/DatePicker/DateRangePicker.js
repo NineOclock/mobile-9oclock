@@ -21,11 +21,26 @@ class DateRangePicker extends React.Component {
         modalVisible: false,
     };
 
-    setModalVisible(visible) {
+    setModalVisible = (visible) => {
         this.setState({modalVisible: visible});
     }
 
+    /**
+     * 표시되는 문자를 설정합니다.
+     */
+    getLabel = () => {
+        const year = 2018;
+        const month = 7;
+        const day = 30;
+        return `${year}년 ${month}월 ${day}일 - ${year}년 ${month}월 ${day}일 (${day}일간)`;
+    }
+
     render() {
+        const {
+            startDate,
+            endDate
+        } = this.props;
+
         return (
             <TouchableOpacity onPress={() => this.setModalVisible(true)}>
                 <View style={styles.dpRoot}>
@@ -34,11 +49,17 @@ class DateRangePicker extends React.Component {
                             <Icon name="events" style={{color: 'white'}} />
                         </View>
                         <View style={styles.dpLabel}>
-                            <Text style={{color: 'white'}}>2018년 7월 1일 - 7월 31일 (30일간)</Text>
+                            <Text style={{color: 'white'}}>{this.getLabel()}</Text>
                         </View>
                     </View>
                 </View>
-                <DatePickerModal visible={this.state.modalVisible} onClose={() => this.setModalVisible(false)}/>
+                <DatePickerModal
+                    startDate={startDate}
+                    endDate={endDate}
+                    visible={this.state.modalVisible}
+                    onClose={() => this.setModalVisible(false)}
+                    onSelect={() => this.handleSelect}
+                />
             </TouchableOpacity>
         );
     }

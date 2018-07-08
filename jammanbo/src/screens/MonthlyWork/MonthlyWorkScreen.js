@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import moment from 'moment';
+
 import {
     Divider,
     Tile,
@@ -38,7 +40,16 @@ class MonthlyWorkScreen extends React.Component {
     constructor(props) {
         super(props);
         this.renderRow = this.renderRow.bind(this);
-        this.state = {workDate: this.getDummyData()};
+
+        const now = moment();
+        const startDate = Utils.getFirstDayOfMonth(now);
+        const endDate = Utils.getLastDayOfMonth(now);
+
+        this.state = {
+            workData: this.getDummyData(),
+            startDate: startDate,
+            endDate: endDate,
+        };
     }
 
     /**
@@ -84,22 +95,28 @@ class MonthlyWorkScreen extends React.Component {
     /**
      * 각각의 항목을 렌더링 한다.
      */
-    renderRow(workDate) {
+    renderRow(workData) {
         return (
-            <WorkRow workItem={workDate}/>
+            <WorkRow workItem={workData}/>
         );
     }
 
     render() {
-        const workDate = this.state.workDate;
-        const now = Date.now();
-        console.log(Utils.getFirstDayOfMonthDate(now));
+        const {
+            workData,
+            startDate,
+            endDate,
+        } = this.state;
+
+
         return (
             <Screen styleName={"paper"}>
                 <DateRangePicker
+                    startDate={startDate}
+                    endDate={endDate}
                 />
                 <ListView
-                    data={workDate}
+                    data={workData}
                     renderRow={this.renderRow}
                 />
             </Screen>

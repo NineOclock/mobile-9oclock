@@ -94,16 +94,22 @@ class Utils {
     }
 
     /**
-     * 해당하는 달 1일의  날짜를 반환한다.
+     * 해당하는 달 첫째날 1일의  날짜를 반환한다.
      */
-    static getFirstDayOfMonthDate = (date) => {
-        const inputDate = moment(date);
-        console.log(inputDate.year());
-        console.log(inputDate.month());
-        const firstDay = moment({year: inputDate.year(), month: inputDate.month(), day: 1});
-        console.log(firstDay);
+    static getFirstDayOfMonth = (date) => {
+        const firstDay = moment({year: date.year(), month: date.month(), date: 1});
         return firstDay;
     }
+
+    /**
+     * 해당하는 달 마지막 날짜를 반환한다.
+     */
+    static getLastDayOfMonth = (date) => {
+        const lastDay = date.endOf('month');
+        return lastDay;
+    }
+
+
 }
 
 Utils.staticConstructor()
