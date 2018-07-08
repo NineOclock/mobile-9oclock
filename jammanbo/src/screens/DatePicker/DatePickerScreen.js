@@ -15,7 +15,9 @@ import {
     Icon,
     ImageBackground
 } from '@shoutem/ui';
-import DatePickerModal from '../../components/DatePicker/DatePickerModal';
+
+
+import DateRangePicker from '../../components/DatePicker/DateRangePicker';
 
 class DatePickerScreen extends React.Component {
     static navigationOptions = {
@@ -32,18 +34,9 @@ class DatePickerScreen extends React.Component {
 
     render() {
         return (
-            <View>
-                <DatePickerModal
-                    visible={this.state.modalVisible}
-                    onClose={() => this.setModalVisible(false)}
-                />
-                <Button
-                    onPress={() => this.setModalVisible(true)}
-                >
-                    <Text>Show</Text>
-                </Button>
-                <Divider styleName="line" />
-            </View>
+            <Screen styleName={"paper"}>
+                <DateRangePicker/>
+            </Screen>
         );
     }
 }

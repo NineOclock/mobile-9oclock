@@ -15,14 +15,21 @@ import {
     Icon,
     ImageBackground
 } from '@shoutem/ui';
+
+/**
+ * Components Import
+ */
+import WorkRow from './WorkRow';
+import DateRangePicker from '../../components/DatePicker/DateRangePicker';
+
 /**
  * Utils Import
  */
-import Utils from '../../utils'
+import Utils from '../../utils/Utils';
 
 class MonthlyWorkScreen extends React.Component {
     static navigationOptions = {
-        title: '월간뷰',
+        title: "9 O'CLOCK",
     };
 
     /**
@@ -74,120 +81,23 @@ class MonthlyWorkScreen extends React.Component {
         return data;
     }
 
-
+    /**
+     * 각각의 항목을 렌더링 한다.
+     */
     renderRow(workDate) {
-        const type = Utils.getStringType(workDate.type);
-
-        if(workDate.type === 'off') {
-            return (
-                <Row style={{
-                    backgroundColor: 'white',
-                    padding: 5,
-                }}>
-
-                    <View style={styles.rowOff}>
-                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={{fontSize: 13, fontFamily: 'Rubik-Regular', color: 'white'}}>
-                                {Utils.getStringOff(workDate.date)}
-                            </Text>
-                        </View>
-                    </View>
-                </Row>
-            );
-        } else {
-            return (
-                <Row style={{
-                    backgroundColor: 'white',
-                    padding: 5,
-                }}>
-
-                    <View style={styles.row}>
-                        {/* 미니 날짜 Viewer */}
-                        <View style={{width: 70, height: 80, padding: 5}}>
-                            <View
-                                style={{flex: 1, borderRadius: 10, backgroundColor: 'white', flexDirection: 'column'}}>
-                                <View style={{
-                                    flex: 2,
-                                    alignItems: 'flex-start',
-                                    justifyContent: 'flex-end',
-                                    marginLeft: 10,
-                                    marginTop: 5
-                                }}>
-                                    <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular'}}>
-                                        {workDate.date.getMonth() + 1 + '월'}
-                                    </Text>
-                                </View>
-                                <View style={{flex: 3, alignItems: 'center', justifyContent: 'flex-start'}}>
-                                    <Text style={{fontSize: 21, fontWeight: 'bold'}}>
-                                        {workDate.date.getDate()}
-                                    </Text>
-                                </View>
-                                <View style={{
-                                    flex: 2,
-                                    alignItems: 'center',
-                                    justifyContent: 'flex-start',
-                                    marginBottom: 5
-                                }}>
-                                    <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular'}}>
-                                        {Utils.weekdays[workDate.date.getDay()]}
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        {/*근무시간 뷰*/}
-                        <View style={{flex: 1, flexDirection: 'column', paddingLeft: 0}}>
-                            {/*from to*/}
-                            <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
-                                <Text style={{fontSize: 15, fontFamily: 'Rubik-Regular'}}>
-                                    {
-                                        Utils.getStringDate(workDate.startTime) + ' ~ ' +
-                                        Utils.getStringDate(workDate.endTime)
-                                    }
-                                </Text>
-                            </View>
-                            {/*시간*/}
-                            <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
-                                <Text style={{fontSize: 15, fontFamily: 'Rubik-Regular', color: 'gray'}}>
-                                    {Utils.getStringWorkRange(workDate.startTime, workDate.endTime)}
-                                </Text>
-                            </View>
-                        </View>
-
-                        {/* 출퇴근 상태 뷰 */}
-                        <View style={{flexDirection: 'column', width: 70, height: 80, padding: 5}}>
-                            <View style={{flex: 1}}></View>
-                            <View style={{flex: 5, alignItems: 'center', justifyContent: 'center'}}>
-                                <View style={{
-                                    width: 26,
-                                    height: 26,
-                                    backgroundColor: type.color,
-                                    borderRadius: 13
-                                }}></View>
-                            </View>
-                            <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular', color: type.color}}>
-                                    {type.text}
-                                </Text>
-                            </View>
-                            <View style={{flex: 1}}></View>
-                        </View>
-
-                    </View>
-                </Row>
-            );
-        }
+        return (
+            <WorkRow workItem={workDate}/>
+        );
     }
 
     render() {
         const workDate = this.state.workDate;
-
+        const now = Date.now();
+        console.log(Utils.getFirstDayOfMonthDate(now));
         return (
             <Screen styleName={"paper"}>
-                {/*<Tile>*/}
-                {/*<Title styleName="md-gutter-bottom">{"Test"}</Title>*/}
-                {/*</Tile>*/}
-                <Divider styleName="line" />
+                <DateRangePicker
+                />
                 <ListView
                     data={workDate}
                     renderRow={this.renderRow}
@@ -199,50 +109,8 @@ class MonthlyWorkScreen extends React.Component {
 
 
 /**
- * LandingScreen 스타일 지정
+ * 스타일 지정
  */
 const styles = StyleSheet.create({
-    row: {
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        height: 80,
-        backgroundColor: '#eaecf0',
-        borderRadius: 15,
-    },
-    rowOff: {
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        height: 60,
-        backgroundColor: '#6ab7f2',
-        borderRadius: 15,
-    },
-    top: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-    },
-    center: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    clock: {
-        flex: 8
-    },
-    bottom: {
-        flex: 1,
-    },
-    view: {
-        flex: 1
-    },
-    text: {
-        color: 'white',
-        fontSize: 25,
-        fontWeight: 'bold',
-        fontFamily: 'Rubik-Regular',
-    }
 });
 export default MonthlyWorkScreen;

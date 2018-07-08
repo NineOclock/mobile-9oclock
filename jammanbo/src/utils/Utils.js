@@ -1,3 +1,4 @@
+import moment from 'moment';
 /**
  * 유틸 모음
  */
@@ -16,6 +17,8 @@ class Utils {
         weekdays[5] = "금요일";
         weekdays[6] = "토요일";
         Utils.weekdays = weekdays;
+
+        console.log("monent", moment);
     }
 
     /**
@@ -88,6 +91,18 @@ class Utils {
      */
     static getStringOff = (date) => {
         return `${date.getMonth() + 1}월 ${date.getDate()}일(${Utils.weekdays[date.getDay()]})은 연차였어요`;
+    }
+
+    /**
+     * 해당하는 달 1일의  날짜를 반환한다.
+     */
+    static getFirstDayOfMonthDate = (date) => {
+        const inputDate = moment(date);
+        console.log(inputDate.year());
+        console.log(inputDate.month());
+        const firstDay = moment({year: inputDate.year(), month: inputDate.month(), day: 1});
+        console.log(firstDay);
+        return firstDay;
     }
 }
 

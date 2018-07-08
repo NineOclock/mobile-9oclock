@@ -140,11 +140,10 @@ class WorkRow extends React.Component {
 const styles = StyleSheet.create({
     row: {
         width: '100%',
-        height: '100%',
         flexDirection: 'row',
         height: 80,
         backgroundColor: '#eaecf0',
-        borderRadius: 15,
+        borderRadius: 5,
     },
     rowOff: {
         width: '100%',
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 60,
         backgroundColor: '#6ab7f2',
-        borderRadius: 15,
+        borderRadius: 5,
     },
     top: {
         flex: 1,
@@ -186,7 +185,7 @@ WorkRow.propTypes = {
     /**
      * 해당하는 날짜의 근무 정보입니다.
      */
-    workItem: PropTypes.bool.isRequired,
+    workItem: PropTypes.object.isRequired,
 };
 
 export default WorkRow;
