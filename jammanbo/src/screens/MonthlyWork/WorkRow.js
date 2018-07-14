@@ -27,17 +27,19 @@ import Utils from '../../utils'
 class WorkRow extends React.Component {
     render() {
         const {
-           workItem
+            workItem
         } = this.props;
         const type = Utils.getStringType(workItem.type);
 
         if(workItem.type === 'off') {
             return (
                 <Row style={{
-                    backgroundColor: 'white',
-                    padding: 5,
+                    backgroundColor: '#f9f7fa',
+                    padding: 0,
+                    paddingBottom: 5,
+                    paddingRight: 10,
+                    paddingLeft: 10,
                 }}>
-
                     <View style={styles.rowOff}>
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                             <Text style={{fontSize: 13, fontFamily: 'Rubik-Regular', color: 'white'}}>
@@ -50,38 +52,45 @@ class WorkRow extends React.Component {
         } else {
             return (
                 <Row style={{
-                    backgroundColor: 'white',
-                    padding: 5,
+                    backgroundColor: '#f9f7fa',
+                    padding: 0,
+                    paddingBottom: 5,
+                    paddingRight: 10,
+                    paddingLeft: 10,
                 }}>
-
                     <View style={styles.row}>
                         {/* 미니 날짜 Viewer */}
-                        <View style={{width: 70, height: 80, padding: 5}}>
+                        <View style={{width: 55, height: 65}}>
                             <View
-                                style={{flex: 1, borderRadius: 10, backgroundColor: 'white', flexDirection: 'column'}}>
+                                style={{flex: 1,
+                                    borderTopLeftRadius: 5,
+                                    borderBottomLeftRadius: 5,
+                                    backgroundColor: '#f9f7fa',
+                                    flexDirection: 'column'}}
+                            >
                                 <View style={{
-                                    flex: 2,
+                                    flex: 3,
                                     alignItems: 'flex-start',
                                     justifyContent: 'flex-end',
-                                    marginLeft: 10,
+                                    marginLeft: 17,
                                     marginTop: 5
                                 }}>
-                                    <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular'}}>
+                                    <Text style={{fontSize: 9, fontFamily: 'Rubik-Regular'}}>
                                         {workItem.date.getMonth() + 1 + '월'}
                                     </Text>
                                 </View>
-                                <View style={{flex: 3, alignItems: 'center', justifyContent: 'flex-start'}}>
+                                <View style={{flex: 5, alignItems: 'center', justifyContent: 'flex-start'}}>
                                     <Text style={{fontSize: 21, fontWeight: 'bold'}}>
                                         {workItem.date.getDate()}
                                     </Text>
                                 </View>
                                 <View style={{
-                                    flex: 2,
+                                    flex: 3,
                                     alignItems: 'center',
                                     justifyContent: 'flex-start',
                                     marginBottom: 5
                                 }}>
-                                    <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular'}}>
+                                    <Text style={{fontSize: 9, fontFamily: 'Rubik-Regular'}}>
                                         {Utils.weekdays[workItem.date.getDay()]}
                                     </Text>
                                 </View>
@@ -108,21 +117,21 @@ class WorkRow extends React.Component {
                         </View>
 
                         {/* 출퇴근 상태 뷰 */}
-                        <View style={{flexDirection: 'column', width: 70, height: 80, padding: 5}}>
+                        <View style={{flexDirection: 'column', width: 70, height: 65, padding: 5}}>
                             <View style={{flex: 1}}></View>
-                            <View style={{flex: 5, alignItems: 'center', justifyContent: 'center'}}>
-                                <View style={{
-                                    width: 26,
-                                    height: 26,
-                                    backgroundColor: type.color,
-                                    borderRadius: 13
-                                }}></View>
-                            </View>
-                            <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{fontSize: 10, fontFamily: 'Rubik-Regular', color: type.color}}>
-                                    {type.text}
-                                </Text>
-                            </View>
+                            {/*<View style={{flex: 5, alignItems: 'center', justifyContent: 'center'}}>*/}
+                                {/*<View style={{*/}
+                                    {/*width: 26,*/}
+                                    {/*height: 26,*/}
+                                    {/*backgroundColor: type.color,*/}
+                                    {/*borderRadius: 13*/}
+                                {/*}}></View>*/}
+                            {/*</View>*/}
+                            {/*<View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>*/}
+                                {/*<Text style={{fontSize: 10, fontFamily: 'Rubik-Regular', color: type.color}}>*/}
+                                    {/*{type.text}*/}
+                                {/*</Text>*/}
+                            {/*</View>*/}
                             <View style={{flex: 1}}></View>
                         </View>
 
@@ -141,16 +150,18 @@ const styles = StyleSheet.create({
     row: {
         width: '100%',
         flexDirection: 'row',
-        height: 80,
-        backgroundColor: '#eaecf0',
+        height: 65,
+        backgroundColor: 'white',
         borderRadius: 5,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.3,
     },
     rowOff: {
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        height: 60,
-        backgroundColor: '#6ab7f2',
+        height: 40,
+        backgroundColor: 'white',
         borderRadius: 5,
     },
     top: {

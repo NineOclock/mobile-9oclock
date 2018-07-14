@@ -46,10 +46,10 @@ class DateRangePicker extends React.Component {
                 <View style={styles.dpRoot}>
                     <View style={styles.dpDiv}>
                         <View style={styles.dpIcon}>
-                            <Icon name="events" style={{color: 'white'}} />
+                            <Icon name="events" style={{color: '#fba9ce'}} />
                         </View>
                         <View style={styles.dpLabel}>
-                            <Text style={{color: 'white'}}>{this.getLabel()}</Text>
+                            <Text style={{color: '#fddce6'}}>{this.getLabel()}</Text>
                         </View>
                     </View>
                 </View>
@@ -73,13 +73,12 @@ const styles = StyleSheet.create({
     dpRoot: {
         width: '100%',
         alignItems: 'center',
-        padding: 10,
-        height: 70,
+        padding: 0,
+        height: 60,
     },
     dpDiv: {
         flex: 1,
         height: 50,
-        backgroundColor: '#333333',
         borderRadius: 5,
         flexDirection: 'row',
     },
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 5,
         borderTopLeftRadius: 5,
         width: 50,
-        backgroundColor: '#474747',
+        backgroundColor: '#fddce6',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderBottomRightRadius: 5,
         borderTopRightRadius: 5,
-        backgroundColor: '#333333',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
     }

@@ -20,6 +20,20 @@ class HomeScreen extends React.Component {
         return (
             <View>
                 <Button
+                    onPress={() => navigate('Main')}
+                >
+                    <Text>메인</Text>
+                </Button>
+                <Divider styleName="line" />
+
+                <Button
+                    onPress={() => navigate('More')}
+                >
+                    <Text>More</Text>
+                </Button>
+                <Divider styleName="line" />
+
+                <Button
                     onPress={() => navigate('MonthlyWork')}
                 >
                     <Text>월간뷰</Text>

@@ -16,16 +16,21 @@ import {
     DummyScreen,
     LoginScreen,
     DatePickerScreen,
-
+    MainSceen,
+    MoreScreen,
 } from './screens';
 
 /**
  * 메인 스택
  */
 const PagesStack = createStackNavigator({
-    Home: HomeScreen,
-    MonthlyWork: MonthlyWorkScreen,
-});
+        Home: HomeScreen,
+        Main: MainSceen,
+        More: MoreScreen,
+        MonthlyWork: MonthlyWorkScreen,
+        Landing: LandingScreen,
+    },
+);
 
 /**
  * 세부 스택 세부 검토사항을 포함한다.
@@ -47,6 +52,7 @@ const ShoutemStack = createStackNavigator({
  */
 const MainTabNavitagion = createBottomTabNavigator(
     {
+        Today: PagesStack,
         Pages: PagesStack,
         Detail: DetailStack,
         Shoutem: ShoutemStack,
@@ -85,7 +91,7 @@ class Main extends React.Component {
      */
     checkReady = () => {
         // 로그인 등의 초기 앱 실행가능 상태를 체크한다.
-        setTimeout(() => this.setState({isReady: true}), 1000);
+        setTimeout(() => this.setState({isReady: true}), 3000);
     }
 
     /**
@@ -99,7 +105,7 @@ class Main extends React.Component {
      * Render
      */
     render() {
-        let content = <DummyScreen/>;
+        let content = <LandingScreen/>;
         if(this.state.fontLoaded) {
             if(this.state.isReady) {
                 if(this.state.isLogin) {
@@ -107,6 +113,8 @@ class Main extends React.Component {
                 } else {
                     content = <LoginScreen onLogin={this.handleLogin}/>;
                 }
+                // 로그인 무시
+                content = <MainTabNavitagion/>;
             } else {
                 content = <LandingScreen/>;
             }

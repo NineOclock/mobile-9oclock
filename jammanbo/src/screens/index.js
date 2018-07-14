@@ -6,3 +6,5 @@ export LandingScreen from './Landing';
 export LoginScreen from './Login';
 export DummyScreen from './Dummy';
 export DatePickerScreen from './DatePicker';
+export MainSceen from './Main';
+export MoreScreen from './More';

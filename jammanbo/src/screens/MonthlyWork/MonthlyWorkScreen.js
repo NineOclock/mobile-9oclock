@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import moment from 'moment';
 
 import {
@@ -10,12 +10,11 @@ import {
     Title,
     Subtitle,
     Row,
-    // Text,
+    Text,
     Caption,
     Image,
     Button,
     Icon,
-    ImageBackground
 } from '@shoutem/ui';
 
 /**
@@ -32,6 +31,7 @@ import Utils from '../../utils/Utils';
 class MonthlyWorkScreen extends React.Component {
     static navigationOptions = {
         title: "9 O'CLOCK",
+        header: () => null,
     };
 
     /**
@@ -110,16 +110,56 @@ class MonthlyWorkScreen extends React.Component {
 
 
         return (
-            <Screen styleName={"paper"}>
-                <DateRangePicker
-                    startDate={startDate}
-                    endDate={endDate}
-                />
-                <ListView
-                    data={workData}
-                    renderRow={this.renderRow}
-                />
-            </Screen>
+            <View style={styles.container}>
+                <ImageBackground
+                    resizeMode='cover'
+                    style={styles.background}
+                    source={require('../../../assets/images/header.jpg')}
+                >
+                    {/*헤더*/}
+                    <View
+                        style={{
+                            height: 130,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Text
+                            style={{fontSize: 25, color: 'white'}}
+                        >
+                            9OCLOCK
+                        </Text>
+                    </View>
+
+                    <View
+                        style={{flex: 1, backgroundColor: '#f9f7fa'}}
+                    >
+                        <View style={{marginTop: -37, paddingLeft: 10, paddingRight: 10}}>
+                            <DateRangePicker
+                                startDate={startDate}
+                                endDate={endDate}
+                            />
+                            <View style={{
+                                width: '100%',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginTop: 5,
+                                height: 50,
+                                borderRadius: 5,
+                                backgroundColor: '#fddce6',
+                            }}>
+                                <Text style={{color: 'gray'}}>조회기간 통계보기</Text>
+                            </View>
+                        </View>
+                        <View style={{backgroundColor: '#f9f7fa', marginTop: 5}}>
+                            <ListView
+                                data={workData}
+                                renderRow={this.renderRow}
+                            />
+                        </View>
+                    </View>
+                </ImageBackground>
+            </View>
         );
     }
 }
@@ -129,5 +169,17 @@ class MonthlyWorkScreen extends React.Component {
  * 스타일 지정
  */
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#f9f7fa',
+    },
+    background: {
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
+    },
+    datePicker: {
+        top: 100
+    }
 });
 export default MonthlyWorkScreen;
